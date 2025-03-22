@@ -1,0 +1,118 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <locale.h>
+
+
+
+int find_zero(int array[], int len)
+{
+    for (int i=0; i<len; i++)
+    {
+        if (array[i] == 0)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+
+int count_left(int array[], int zero)
+{
+    int res = 0;
+    for (int i=0; i<zero; i++)
+    {
+        res += array[i];
+    }
+    return res;
+}
+
+
+
+int count_right(int array[], int n, int zero)
+{
+    int res = 0;
+    for (int i=zero; i<n; i++)
+    {
+        res += array[i];
+    }
+    return res;
+}
+
+
+
+
+
+
+
+
+int main()
+{
+    srand(time(NULL));
+    setlocale(LC_ALL, "Rus");
+
+    int exit = 1;
+
+    do{
+    int const N1 = 8, N2 = 20;
+    int A[N1], B[N2];
+    int jumpA = 4, jumpB = 4;
+
+
+
+    printf("Массив A:\n");
+
+    int zero_A = rand() % N1;
+
+    for (int i=0; i<N1; i++)
+    {
+        A[i] = rand() % 11 - 5;
+
+        if (i == zero_A)
+            { A[i] = 0;}
+
+        if ((i+1) % jumpA==0)
+            { printf("%3d\n", A[i]);}
+
+        else
+            { printf("%3d", A[i]);}
+    }
+
+
+
+    printf("Массив B:\n");
+    int zero_B = rand() % N2;
+
+    for (int j=0; j<N2; j++)
+    {
+        B[j] = rand() % 11 - 5;
+
+        if (j == zero_B)
+            {B[j] = 0;}
+
+        if ((j+1) % jumpB==0)
+            {printf("%3d\n", B[j]);}
+        else
+            { printf("%3d", B[j]);}
+    }
+
+
+
+
+    int idA = find_zero(A, N1) < zero_A ? find_zero(A, N1) : zero_A;
+    int idB = find_zero(B, N2) < zero_B ? find_zero(B, N2) : zero_B;
+
+
+    printf("Сумма элементов массива А в первой части: %d\n", count_left(A, idA));
+    printf("Сумма элементов массива А во второй части: %d\n", count_right(A, N1, idA));
+    printf("\n");
+    printf("Сумма элементов массива B в первой части: %d\n", count_left(B, idB));
+    printf("Сумма элементов массива B во второй части: %d\n", count_right(B, N2, idB));
+
+    printf("Введите 1 или 0:\n");
+    scanf("%d", &exit);
+
+    } while (exit == 1);
+}
