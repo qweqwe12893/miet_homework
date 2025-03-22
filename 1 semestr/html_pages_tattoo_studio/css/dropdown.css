@@ -1,0 +1,57 @@
+.dropdown {
+    float: left; /* Расположение выпадающего меню слева */
+    overflow: hidden; /* Скрыть переполнение */
+}
+
+.dropdown .dropbtn {
+    font-size: 16px; /* Размер шрифта */
+    border: none; /* Без рамки */
+    outline: none; /* Без обводки */
+    color: white; /* Цвет текста */
+    padding: 14px 16px; /* Отступы */
+    background-color: #333; /* Фоновый цвет */
+    cursor: pointer; /* Курсор при наведении */
+}
+
+/* Изменение цвета при наведении на кнопку выпадающего меню */
+.dropdown:hover .dropbtn {
+    background-color: #ddd; /* Фоновый цвет при наведении */
+    color: black; /* Цвет текста при наведении */
+}
+
+/* Стили для выпадающего контента */
+.dropdown-content {
+    display: none; /* Скрыть выпадающее меню по умолчанию */
+    position: absolute; /* Абсолютное позиционирование */
+    background-color: #f9f9f9; /* Цвет фона выпадающего меню */
+    min-width: 160px; /* Минимальная ширина */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Тень */
+    z-index: 1; /* Уровень наложения */
+}
+
+/* Стили для ссылок в выпадающем меню */
+.dropdown-content a {
+    color: black; /* Цвет текста */
+    padding: 12px 16px; /* Отступы */
+    text-decoration: none; /* Убрать подчеркивание */
+    display: block; /* Блоковое отображение */
+}
+
+/* Изменение цвета при наведении на ссылки выпадающего меню */
+.dropdown-content a:hover {
+    background-color: #f1f1f1; /* Фоновый цвет при наведении */
+}
+
+/* Показывать контент при наведении на выпадающее меню */
+.dropdown:hover .dropdown-content {
+    display: block; /* Показывать содержимое */
+}
+
+/* Дополнительные стили для контента */
+.content {
+    display: none; /* Скрывать контент по умолчанию */
+}
+
+.content.active {
+    display: block; /* Показать активный контент */
+}

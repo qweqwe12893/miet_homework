@@ -1,0 +1,45 @@
+
+
+.container
+{
+    display: flex;
+    justify-content: center;
+    gap: 26px;
+    margin-top: 100px;
+    
+}
+
+img
+{
+    margin-bottom: 26px;
+    width: 150px;
+    height: 150px;
+    border-radius: 20px;
+    border: double;
+    border-width: 5px;
+    object-fit: fill;
+}
+
+.chel{
+    border-radius: 100px;
+}
+
+
+h4{
+    margin-left: 300px;
+}
+
+video{
+    border-radius: 20px;
+    border: double;
+    border-width: 5px;
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+
+
+.slowmo
+{
+    color: rgb(181, 25, 25);
+    margin-top: 60px;
+}

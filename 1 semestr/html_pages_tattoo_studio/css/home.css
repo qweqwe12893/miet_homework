@@ -1,0 +1,39 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+.pair{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 50px;
+    padding-top: 30px;
+    align-items: center;
+
+}
+
+.armpit-text{
+    padding: 30px;
+    flex: 1;
+    font-size: 25px;
+    align-items: right;
+    line-height: 150%;
+}
+
+.armpit-img{
+    height: 350px;
+    width: 500px;
+    padding: 0px;
+    flex: 1;
+    object-fit: cover;
+    margin: 30px;
+    border-radius: 40px;
+    border: double;
+    border-width: 5px;
+}
+
+
+
