@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <locale.h>
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	int rub;
+
+	do
+	{
+    	scanf("%d", &rub);
+    	if  (rub < 0)
+    	{ printf("You can't have negative amount of money. Try again: "); }
+	} while (rub < 0);
+
+
+    	if (rub == 11 || rub == 12 || rub == 13 || rub == 14)
+    	{
+        	printf("%d Рублей", rub);
+    	}
+    	else
+    	{
+        	switch (rub % 10)
+        	{
+        	case 1:
+            	printf("%d Рубль", rub);
+            	break;
+
+        	case 2:
+        	case 3:
+        	case 4:
+            	printf("%d Рубля", rub);
+            	break;
+
+        	default:
+            	printf("%d Рублей", rub);
+            	break;
+        	}
+    	}
+}
+
+

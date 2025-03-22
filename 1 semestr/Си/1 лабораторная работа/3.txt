@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+
+void f(int k, int input)
+{
+    int sign = 1;
+	if (input < 0)
+	{
+    	sign = 0;
+    	input *= -1;
+	}
+
+	int res = 0, zeros = 1;
+	while (input > 0)
+	{
+    	if (input % 10 != k)
+    	{
+        	res += input % 10*zeros;
+        	zeros *= 10;
+    	}
+    	input = input / 10;
+	}
+
+	printf("%d \n", (sign==1)?res:-1*res);
+
+}
+
+
+int main()
+{
+	int k;
+	int input;
+	int choice;
+
+	do
+    {
+    printf("\nEnter k: ");
+    scanf("%d", &k);
+    printf("Enter a number: ");
+    scanf("%d", &input);
+    f(k, input);
+
+    printf("Enter 1 or 0: ");
+    scanf("%d", &choice);
+    } while (choice);
+
+}
+
+
+
+

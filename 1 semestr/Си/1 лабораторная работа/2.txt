@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <locale.h>
+
+void f(char input)
+{
+
+    if (input >= 48 && input <= 57)
+	{
+    	printf("Цифра \n");
+
+	}
+
+	else
+    {
+        if ((input >= 65 && input <= 90)  ||  (input >= 97 &&  input <= 122))
+    	{
+    	printf("Латинская буква \n");
+    	}
+    	else
+        {
+    	printf("Ошибка ввода \n");
+    	}
+    }
+}
+
+int main()
+{
+    setlocale(LC_ALL, "Rus");
+
+    char input;
+    int choice = 1;
+
+    do
+    {
+        printf("\nEnter a character: ");
+        scanf("\n %c", &input);
+
+        f(input);
+
+        printf("Enter 0 or 1: ");
+        scanf("%d", &choice);
+
+    } while (choice);
+}
+
+
+}
+
