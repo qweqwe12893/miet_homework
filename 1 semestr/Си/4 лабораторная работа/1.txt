@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <locale.h>
+#include <math.h>
+
+#define N 12
+
+void mins(int matrix[][N], int *res)
+{
+    int min;
+
+    for (int i=0; i<N; i++, res++)
+    {
+        min = matrix[i][0];
+
+        for (int j=0; j<N; j++)
+        {
+            min = min < matrix[i][j] ? min : matrix[i][j];
+        }
+        *res = abs(min);
+    }
+}
+
+
+int main()
+{
+    srand(time(NULL));
+    setlocale(LC_ALL, "Rus");
+
+    int matrix[N][N];
+    int res[N];
+
+    int exit = 1;
+
+    do
+{
+    printf("Созданная матрица: \n");
+    for (int i=0; i<N; i++)
+    {
+        for (int j=0; j<N; j++)
+        {
+            matrix[i][j] = rand() % 21 - 10;
+
+            if (j==N-1)
+                { printf("%4d\n", matrix[i][j]); }
+            else
+                {printf("%4d", matrix[i][j]);}
+        }
+    }
+
+
+
+
+    mins(matrix, res);
+    printf("\nМинимумы по модулям: \n");
+    for (int i=0; i<N; i++){
+        printf("  В %d столбце это %d\n", i+1, res[i]);
+    }
+
+    printf("Введите 1 или 0: \n");
+    scanf("%d", &exit);
+} while (exit == 1);
+}
+
+/*Дана целочисленная матрица NxN
+Создать функцию,  которая формирует одномерный массив, содержащий минимумы (по модулю) каждого столбца.
+*/

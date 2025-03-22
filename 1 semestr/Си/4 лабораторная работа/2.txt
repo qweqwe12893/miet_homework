@@ -1,0 +1,94 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <locale.h>
+
+#define N 6
+
+void mins(int matrix[][N], int *res)
+{
+    int indent = 0;
+    int zeros = 0;
+
+    for (int i=0; i<N/2; i++, indent++)
+    {
+
+        for (int j=0; j<N; j++)
+        {
+            if ((j >= indent)  && (j < N - indent))
+            {
+                if (matrix[i][j] == 0)
+                {
+                    zeros++;
+                }
+            }
+        }
+
+    }
+    *res = zeros;
+    res++;
+    indent--;
+
+    int positives = 0;
+    for (int i=N/2; i<N; i++, indent--)
+    {
+        for (int j=0; j<N; j++)
+        {
+            if ((j >= indent)  && (j < N - indent))
+            {
+                if (matrix[i][j] > 0)
+                {
+                    positives++;
+                }
+            }
+        }
+    }
+    *res = positives;
+}
+
+
+int main()
+{
+    srand(time(NULL));
+    setlocale(LC_ALL, "Rus");
+
+    int matrix[N][N];
+    int res[2];
+
+    int exit = 1;
+
+    do
+{
+    printf("Созданная матрица: \n");
+    for (int i=0; i<N; i++)
+    {
+        for (int j=0; j<N; j++)
+        {
+            matrix[i][j] = rand() % 7 - 3;
+
+            if (j==N-1)
+                { printf("%4d\n", matrix[i][j]); }
+            else
+                {printf("%4d", matrix[i][j]);}
+        }
+    }
+
+
+
+
+    mins(matrix, res);
+    printf("\nКоличество нулей в верхней области: %d", res[0]);
+    printf("\nКоличество положительных элементов в нижней области: %d", res[1]);
+
+    printf("\nВведите 0 или 1: \n");
+    scanf("%d", &exit);
+
+    } while (exit == 1);
+}
+
+/*
+Дана целочисленная матрица NxN
+Создать функцию, которая возвращает 2 значения:
+Найти количество нулей в верхней заштрихованной
+области и количество положительных элементов в нижней.
+*/
