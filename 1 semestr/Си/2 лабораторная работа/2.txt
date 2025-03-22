@@ -1,0 +1,94 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <locale.h>
+
+#define ANSI_COLOR_GREEN    "\x1b[32m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
+
+int main()
+{
+    srand(time(NULL));
+    setlocale(LC_ALL, "Rus");
+    int matrix[10][10];
+    int i, j;
+    int start, end;
+    int count_zeros, count_positive;
+
+    while (1) {
+    start = 0; end = 9;
+    count_zeros = 0; count_positive=0;
+    printf("Созданная матрица: \n");
+
+    for (i=0; i<10; i++)
+    {
+        for (j=0; j<10; j++)
+        {
+            matrix[i][j] = rand() % 11 - 5;
+            if (j >= start && j <= end )
+            {
+                printf(ANSI_COLOR_GREEN "%4d" ANSI_COLOR_RESET, matrix[i][j]);
+                if (i < 5 && matrix[i][j] == 0)
+                    { count_zeros++ ;}
+                else if (matrix[i][j] > 0 && i >= 5)
+                    { count_positive++ ;}
+            }
+            else
+            {
+                printf("%4d", matrix[i][j]);
+            }
+        }
+        printf("\n");
+
+        if (i < 4)
+        {
+            start++;
+            end--;
+        }
+        else if (i == 4)
+            { continue;}
+        else
+        {
+            start--;
+            end++;
+        }
+    }
+
+    printf("В верхней части %dшт нулей \n", count_zeros);
+    printf("В нижней части %d положительный элементов \n", count_positive);
+
+
+
+    int mins[10];
+    int buffer;
+    for (i = 0; i < 10; i++)
+    {
+        buffer = 10000;
+        for (j = 0; j < 10; j++)
+        {
+
+            buffer = matrix[i][j] < buffer ? matrix[i][j] : buffer;
+        }
+        mins[i] = buffer >= 0 ? buffer : -1*buffer;
+    }
+
+    printf("Минимумы каждого столбца по модулю: \n");
+    for (i=0; i<10; i++)
+    {
+        printf("%d ", mins[i]);
+    }
+    printf("\n");
+
+
+    printf("Введите y/n:\n");
+    char exit;
+    scanf("%c", & exit);
+    if (exit == 'n')
+    {
+        break;
+    }
+}
+
+}
+
+
