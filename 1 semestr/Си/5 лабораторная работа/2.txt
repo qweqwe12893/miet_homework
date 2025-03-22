@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <limits.h>
+
+int minShaded(int **matrix, int n, int m) {
+    int minVal = INT_MAX;
+
+    
+    for (int i = 1; i < n; i += 2) {
+        // верхний левый квадрат
+        for (int j = 0; j < m / 2 && i < n/2; j++) {
+            if (matrix[i][j] < minVal) {
+                minVal = matrix[i][j];
+            }
+        }
+        // нижний правый квадрат
+        for (int j = m / 2; j < m && j <= i; j++) {
+            if (matrix[i][j] < minVal) {
+                minVal = matrix[i][j];
+            }
+        }
+    }
+
+    return minVal;
+}
+
+int main() {
+    int n, m;
+    srand(time(NULL));
+
+    printf("Введите количество строк: ");
+    scanf("%d", &n);
+    printf("Введите количество столбцов: ");
+    scanf("%d", &m);
+
+    int **matrix = (int **)malloc(n * sizeof(int *));
+
+    printf("Матрица:\n");
+    for (int i = 0; i < n; i++) {
+        matrix[i] = (int *)malloc(m * sizeof(int)); 
+        for (int j = 0; j < m; j++) {
+            matrix[i][j] = rand() % 100; 
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+
+
+    int min = minShaded(matrix, n, m);
+
+    printf("\nМинимальный элемент в затененной области нечетных строк: %d\n", min);
+
+
+    for (int i = 0; i < n; i++) {
+        free(matrix[i]); 
+    }
+    free(matrix); 
+
+    return 0;
+}
+

@@ -1,0 +1,121 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_WORDS 100
+#define MAX_LENGTH 100
+
+
+
+
+char* remove_extra_spaces(char* str, int len) 
+{
+
+    char* res = (char*) malloc(len * sizeof(char));
+    int i = 0;
+    
+    while (str[i] == ' ')
+    {
+        i++;
+    }
+
+    if (i == len)
+    {
+        char *otv = (char*) malloc(sizeof(char));
+        otv[0] = ' ';
+        return otv;
+    }
+
+    res[0] = str[i];
+    int j = 1;
+    i++;
+
+    for (i; i<len; i++)
+    {
+        if (res[j-1] != ' ' || str[i] != ' ')
+        {
+            res[j] = str[i];
+            j++;
+        }
+    }
+
+    if (res[j-2] == ' ')
+        { j--; }
+    res[j-1] = '\0';
+    return res;
+}
+
+
+
+
+// (char )a и (char )b преобразуют void  
+// в указатели на char , а затем разыменовываются, 
+// чтобы получить указатели на строки.
+// для qsort обязательно чтобы параметры были const void
+int compare(const void *a, const void *b) {
+    char *word1 = *(char **)a;
+    char *word2 = *(char **)b;
+    return strlen(word1) - strlen(word2);
+}
+
+
+int main() {
+
+
+
+do{
+    printf("-------Начало программы-------\n");
+    char *str1=(char*)malloc(MAX_LENGTH);
+    printf("Введите первую строку: ");
+    fgets(str1, MAX_LENGTH, stdin);
+
+    char* mod_str = remove_extra_spaces(str1, MAX_LENGTH);
+    printf("Первая строка без лишних пробелов: %s \n", mod_str);
+
+
+
+
+
+    char str2[MAX_LENGTH * MAX_WORDS];
+    char **words = malloc(MAX_WORDS * sizeof(char *)); 
+    int count = 0;
+
+    if (words == NULL) {
+        printf("Упс... Ошибка выделения памяти.");
+        return 1;
+    }
+
+    printf("Введите вторую строку: ");
+    fgets(str2, sizeof(str2), stdin);
+
+    // раздел на слова
+    char *token = strtok(str2, " \n");
+    while (token != NULL && count < MAX_WORDS) {
+
+        words[count] = malloc((strlen(token) + 1) * sizeof(char));
+
+        if (words[count] == NULL) 
+        {
+            printf("Упс... Ошибка выделения памяти.");
+            return 1;
+        }
+
+        strcpy(words[count], token);
+        count++;
+        token = strtok(NULL, " \n");
+    }
+
+    // сртировка слов по длине
+    qsort(words, count, sizeof(char *), compare);
+
+    printf("Слова в порядке возрастания длины:\n");
+    for (int i = 0; i < count; i++) {
+        printf("%s\n", words[i]);
+        free(words[i]); 
+    }
+
+    free(words); 
+ } while (1 == 1);
+    return 0;
+
+}
